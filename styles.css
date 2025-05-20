@@ -1,0 +1,218 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cinzel', serif;
+  line-height: 1.6;
+  color: white;
+  background-color: black;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Entity Styles */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.entity-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#entity-image {
+  max-width: 100%;
+  max-height: 80vh;
+  opacity: 0.15;
+  transition: opacity 1.5s ease;
+  cursor: pointer;
+  /* Make transparent areas non-interactive for hover */
+  pointer-events: painted;
+}
+
+#entity-image:hover {
+  opacity: 1;
+}
+
+#entity-image.active {
+  opacity: 1;
+}
+
+/* Year Labels */
+#years-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#years-container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.year-label {
+  position: absolute;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transform-origin: center;
+  letter-spacing: 1px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.year-label:hover {
+  transform: scale(1.2);
+}
+
+.year-label.selected {
+  box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.5);
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Each year gets a different animation delay */
+.year-label:nth-child(1) { animation-delay: 0s; }
+.year-label:nth-child(2) { animation-delay: 0.2s; }
+.year-label:nth-child(3) { animation-delay: 0.4s; }
+.year-label:nth-child(4) { animation-delay: 0.6s; }
+.year-label:nth-child(5) { animation-delay: 0.8s; }
+.year-label:nth-child(6) { animation-delay: 1.0s; }
+.year-label:nth-child(7) { animation-delay: 1.2s; }
+.year-label:nth-child(8) { animation-delay: 1.4s; }
+.year-label:nth-child(9) { animation-delay: 1.6s; }
+
+/* Summary Card */
+#summary-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  max-width: 400px;
+  width: 60%;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#summary-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#summary-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: white;
+}
+
+/* Donation Icon */
+#donation-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: rgba(128, 128, 128, 0.7);
+  cursor: pointer;
+  z-index: 200;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#donation-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+#donation-icon:hover {
+  transform: scale(1.1);
+  color: rgba(128, 128, 128, 1);
+}
+
+/* Donation Menu */
+#donation-menu {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  padding: 10px;
+  z-index: 150;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#donation-menu.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.donation-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.donation-options a {
+  color: rgba(128, 128, 128, 0.8);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.donation-options a:hover {
+  color: rgba(255, 204, 0, 0.9);
+}
+
+/* Developer Credit */
+#developer-credit {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(128, 128, 128, 0.7);
+  padding: 5px;
+  z-index: 100;
+}
+
+#developer-credit a {
+  color: rgba(128, 128, 128, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#developer-credit a:hover {
+  color: rgba(255, 204, 0, 0.9);
+}

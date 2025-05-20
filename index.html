@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legacy of Dalai Lama</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="img/favicon/site.webmanifest">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="donation-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21c-4.4 0-8-1.8-8-4V9c0-2.2 3.6-4 8-4s8 1.8 8 4v8c0 2.2-3.6 4-8 4z"/>
+      <path d="M12 17c-4.4 0-8-1.8-8-4"/>
+      <path d="M12 13c-4.4 0-8-1.8-8-4"/>
+      <path d="M20 13c0 2.2-3.6 4-8 4"/>
+      <path d="M20 9c0 2.2-3.6 4-8 4"/>
+    </svg>
+  </div>
+  
+  <div id="donation-menu" class="hidden">
+    <div class="donation-options">
+      <a href="https://buymeacoffee.com/tibetan" target="_blank" rel="noopener noreferrer">Support This Project</a>
+      <a href="https://www.dalailamafoundation.org/donate/" target="_blank" rel="noopener noreferrer">Donate to Office of His Holiness the Dalai Lama</a>
+      <a href="https://tibet.net/support-tibet/friends-of-tibet/" target="_blank" rel="noopener noreferrer">Support Central Tibetan Administration</a>
+    </div>
+  </div>
+  
+  <main>
+    <div class="center-container">
+      <div class="entity-container">
+        <img src="img/Entity.png" alt="Dalai Lama" id="entity-image">
+        <div id="years-container"></div>
+      </div>
+      <div id="summary-card" class="hidden">
+        <div id="summary-content"></div>
+      </div>
+    </div>
+  </main>
+
+  <div id="developer-credit">
+    Developed by Tenzin. <a href="https://buymeacoffee.com/tibetan" target="_blank" rel="noopener noreferrer">Support the Developer</a>
+  </div>
+
+  <script type="module" src="data.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
