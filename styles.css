@@ -12,6 +12,9 @@ body {
   background-color: black;
   overflow: hidden;
   height: 100vh;
+  width: 100vw;
+  position: fixed;
+  touch-action: manipulation;
 }
 
 /* Entity Styles */
@@ -30,7 +33,7 @@ body {
   align-items: center;
 }
 
-#entity-image {
+#entity-image, #entity-image-mobile {
   max-width: 100%;
   max-height: 80vh;
   opacity: 0.15;
@@ -38,14 +41,26 @@ body {
   cursor: pointer;
   /* Make transparent areas non-interactive for hover */
   pointer-events: painted;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-#entity-image:hover {
+#entity-image:hover, #entity-image-mobile:hover {
   opacity: 1;
 }
 
-#entity-image.active {
+#entity-image.active, #entity-image-mobile.active {
   opacity: 1;
+}
+
+/* Show/hide images based on screen size */
+.desktop-image {
+  display: block;
+}
+
+.mobile-image {
+  display: none;
 }
 
 /* Year Labels */
@@ -63,6 +78,18 @@ body {
 #years-container.active {
   opacity: 1;
   pointer-events: auto;
+  animation: rotate 120s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .year-label {
@@ -77,15 +104,36 @@ body {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   transform-origin: center;
   letter-spacing: 1px;
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite, counter-rotate 120s linear infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Ensure text is centered in the label */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
 }
 
-.year-label:hover {
-  transform: scale(1.2);
+@keyframes counter-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.year-label:hover, .year-label:active {
+  /* Add scale effect without breaking the animations */
+  transform: scale(1.2) rotate(0deg);
+  z-index: 5;
 }
 
 .year-label.selected {
   box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.5);
+  /* Keep the selected year visible with a stronger glow */
+  z-index: 10;
 }
 
 /* Floating animation */
@@ -120,11 +168,13 @@ body {
   transform: translate(-50%, -50%);
   padding: 20px;
   max-width: 400px;
-  width: 60%;
+  width: 80%;
   text-align: center;
   transition: opacity 0.3s ease;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 #summary-card.hidden {
@@ -148,6 +198,8 @@ body {
   cursor: pointer;
   z-index: 200;
   transition: transform 0.2s ease, color 0.2s ease;
+  padding: 10px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #donation-icon svg {
@@ -155,7 +207,7 @@ body {
   height: 30px;
 }
 
-#donation-icon:hover {
+#donation-icon:hover, #donation-icon:active {
   transform: scale(1.1);
   color: rgba(128, 128, 128, 1);
 }
@@ -163,11 +215,14 @@ body {
 /* Donation Menu */
 #donation-menu {
   position: fixed;
-  top: 60px;
+  top: 70px;
   right: 20px;
-  padding: 10px;
+  padding: 15px;
   z-index: 150;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 #donation-menu.hidden {
@@ -179,18 +234,20 @@ body {
 .donation-options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .donation-options a {
   color: rgba(128, 128, 128, 0.8);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   transition: color 0.2s ease;
   letter-spacing: 0.5px;
+  padding: 5px 0;
+  white-space: nowrap;
 }
 
-.donation-options a:hover {
+.donation-options a:hover, .donation-options a:active {
   color: rgba(255, 204, 0, 0.9);
 }
 
@@ -213,6 +270,115 @@ body {
   transition: color 0.2s ease;
 }
 
-#developer-credit a:hover {
+#developer-credit a:hover, #developer-credit a:active {
   color: rgba(255, 204, 0, 0.9);
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+  #entity-image, #entity-image-mobile {
+    max-height: 70vh;
+  }
+  
+  .year-label {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+  
+  #summary-content {
+    font-size: 0.9rem;
+  }
+  
+  .donation-options a {
+    font-size: 0.8rem;
+  }
+  
+  #donation-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Switch to mobile image */
+  .desktop-image {
+    display: none;
+  }
+  
+  .mobile-image {
+    display: block;
+  }
+  
+  #entity-image-mobile {
+    max-height: 60vh;
+  }
+  
+  .year-label {
+    font-size: 0.75rem;
+    padding: 3px 7px;
+    min-width: 40px;
+  }
+  
+  #summary-card {
+    width: 90%;
+    padding: 15px;
+  }
+  
+  #summary-content {
+    font-size: 0.85rem;
+  }
+  
+  .donation-options {
+    gap: 10px;
+  }
+  
+  .donation-options a {
+    font-size: 0.75rem;
+  }
+  
+  #developer-credit {
+    font-size: 0.65rem;
+  }
+  
+  #donation-icon {
+    top: 15px;
+    right: 15px;
+  }
+  
+  #donation-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #entity-image-mobile {
+    max-height: 55vh;
+  }
+  
+  .year-label {
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    min-width: 36px;
+  }
+  
+  #summary-card {
+    width: 95%;
+    padding: 12px;
+  }
+  
+  #summary-content {
+    font-size: 0.8rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  #entity-image:hover, #entity-image-mobile:hover {
+    opacity: 0.15;
+  }
+  
+  #entity-image:active, #entity-image-mobile:active {
+    opacity: 1;
+  }
 }
