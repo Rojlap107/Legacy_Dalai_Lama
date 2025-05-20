@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const entityImageMobile = document.getElementById('entity-image-mobile');
   const yearsContainer = document.getElementById('years-container');
   
-  // Add option to pause rotation on hover/touch
-  let isRotationPaused = false;
   
   // Detect if the device is touch-enabled
   const isTouchDevice = ('ontouchstart' in window) || 
@@ -184,7 +182,7 @@ function createYearLabels() {
     yearLabel.dataset.x = x;
     yearLabel.dataset.y = y;
     
-    // Add hover events to pause rotation if needed
+    // Add hover events to change z-index
     // This helps make clicking easier
     yearLabel.addEventListener('mouseenter', () => {
       yearLabel.style.zIndex = '20';

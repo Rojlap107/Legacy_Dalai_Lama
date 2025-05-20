@@ -78,24 +78,12 @@ body {
 #years-container.active {
   opacity: 1;
   pointer-events: auto;
-  animation: rotate 120s linear infinite;
-  transform-origin: center center;
-  will-change: transform;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .year-label {
   position: absolute;
   color: white;
-  background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 1rem;
@@ -104,7 +92,7 @@ body {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   transform-origin: center;
   letter-spacing: 1px;
-  animation: float 3s ease-in-out infinite, counter-rotate 120s linear infinite;
+  animation: float 3s ease-in-out infinite;
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -115,18 +103,10 @@ body {
   will-change: transform;
 }
 
-@keyframes counter-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
 
 .year-label:hover, .year-label:active {
-  /* Add scale effect without breaking the animations */
-  transform: scale(1.2) rotate(0deg);
+  /* Add scale effect on hover */
+  transform: scale(1.2);
   z-index: 5;
 }
 
@@ -234,16 +214,16 @@ body {
 .donation-options {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .donation-options a {
   color: rgba(128, 128, 128, 0.8);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   transition: color 0.2s ease;
   letter-spacing: 0.5px;
-  padding: 5px 0;
+  padding: 4px 0;
   white-space: nowrap;
 }
 
@@ -272,6 +252,12 @@ body {
 
 #developer-credit a:hover, #developer-credit a:active {
   color: rgba(255, 204, 0, 0.9);
+}
+
+#pc-recommendation {
+  margin-top: 5px;
+  font-size: 0.65rem;
+  color: rgba(128, 128, 128, 0.7);
 }
 
 /* Media Queries for Responsiveness */
@@ -329,11 +315,12 @@ body {
   }
   
   .donation-options {
-    gap: 10px;
+    gap: 6px;
   }
   
   .donation-options a {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    padding: 3px 0;
   }
   
   #developer-credit {
